@@ -101,13 +101,13 @@
     </tr>
     <tr>
         <th>
-            <label for="runDeckWaitForJobTimeout">Wait for job to finish timeout:</label>
+            <label for="runDeckWaitForJobTimeout">Wait for job to finish timeout (seconds):</label>
         </th>
         <td>
             <div class="completionIconWrapper">
                 <props:textProperty name="runDeckWaitForJobTimeout" className="longField"/>
             </div>
-            <span class="smallNote">How long to wait for the job to finish (if waiting is selected). Please note if waiting is no selected, this field is meaningless</span>
+            <span class="smallNote">How long to wait for the job to finish in seconds. Please note if waiting is not selected, this field is meaningless.</span>
         </td>
     </tr>
 </l:settingsGroup>
