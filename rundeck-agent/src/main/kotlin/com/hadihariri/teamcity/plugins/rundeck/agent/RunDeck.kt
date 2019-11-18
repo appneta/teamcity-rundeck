@@ -31,6 +31,7 @@ public object RunDeck {
                 includeOutput = properties.get("runDeckIncludeOutput") == "true",
                 failBuild = properties.get("runDeckFailBuild") == "true",
                 waitFinish = properties.get("runDeckWaitForJob").toString() == "true",
+                waitFinishTimeout = properties.get("runDeckWaitForJobTimeout").toString().toLong(),
                 jobId = properties.get("runDeckJobID").toString(),
                 jobOptions = properties.get("runDeckJobOptions").toString().replace('\n', ' '),
                 filters = properties.get("runDeckNodeFilter").toString().replace('\n', ' ')
@@ -63,7 +64,11 @@ public object RunDeck {
         if (execution.code == 200) {
             println(ServiceMessage.asString("rundeck", mapOf("text" to "Job ${rundeckOptions.jobId} launched successfully with id ${execution.result}", "status" to "NORMAL")))
             if (rundeckOptions.waitFinish) {
-                while (counter < 1200) {
+                var timeout: Long = 2700
+                if (!PropertiesUtil.isEmptyOrNull(rundeckOptions.waitFinishTimeout)) {
+                  timeout = rundeckOptions.waitFinishTimeout
+                }
+                while (counter < timeout) {
                     val status = rundeckAPI.jobStatus(execution.result, offset, lastModified)
                     offset = status.offset
                     lastModified = status.lastModified

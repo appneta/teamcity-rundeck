@@ -99,8 +99,15 @@
             <span class="smallNote">Wait until the job has finished. Please note that if this is not checked, build won't fail if job fails</span>
         </td>
     </tr>
-
-
-
-
+    <tr>
+        <th>
+            <label for="runDeckWaitForJobTimeout">Wait for job to finish timeout:</label>
+        </th>
+        <td>
+            <div class="completionIconWrapper">
+                <props:textProperty name="runDeckWaitForJobTimeout" className="longField"/>
+            </div>
+            <span class="smallNote">How long to wait for the job to finish (if waiting is selected). Please note if waiting is no selected, this field is meaningless</span>
+        </td>
+    </tr>
 </l:settingsGroup>
