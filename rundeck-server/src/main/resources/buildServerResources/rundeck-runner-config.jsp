@@ -99,4 +99,8 @@
             <span class="smallNote">Wait until the job has finished. Please note that if this is not checked, build won't fail if job fails</span>
         </td>
     </tr>
+
+
+
+
 </l:settingsGroup>
