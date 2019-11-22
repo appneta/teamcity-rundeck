@@ -63,7 +63,7 @@ public object RunDeck {
         if (execution.code == 200) {
             println(ServiceMessage.asString("rundeck", mapOf("text" to "Job ${rundeckOptions.jobId} launched successfully with id ${execution.result}", "status" to "NORMAL")))
             if (rundeckOptions.waitFinish) {
-                while (counter < 2700) {
+                while (counter < 1200) {
                     val status = rundeckAPI.jobStatus(execution.result, offset, lastModified)
                     offset = status.offset
                     lastModified = status.lastModified
