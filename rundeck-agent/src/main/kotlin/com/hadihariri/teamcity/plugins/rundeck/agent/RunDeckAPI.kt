@@ -7,6 +7,7 @@ import org.jdom.Element
 import java.io.StringReader
 import java.net.URLEncoder
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by hadihariri on 05/10/15.
@@ -29,6 +30,10 @@ public class RunDeckAPI(val host: String, val authToken: String) {
             query += "&filter=${URLEncoder.encode(filters, "utf-8")}"
         }
         val client = OkHttpClient()
+        client.setConnectTimeout(60, TimeUnit.SECONDS);
+        client.setReadTimeout(60, TimeUnit.SECONDS);
+        client.setWriteTimeout(60, TimeUnit.SECONDS);
+
         val request = Request.Builder()
                 .url(createRequestUrl("job/$jobId/run", query))
                 .build()
@@ -53,6 +58,10 @@ public class RunDeckAPI(val host: String, val authToken: String) {
 
     fun jobStatus(executionId: String, offset: Long = 0, lastModified: Long = 0): RunDeckJobStatusResponse {
         val client = OkHttpClient()
+        client.setConnectTimeout(60, TimeUnit.SECONDS);
+        client.setReadTimeout(60, TimeUnit.SECONDS);
+        client.setWriteTimeout(60, TimeUnit.SECONDS);
+
         val request = Request.Builder()
                 .url(createRequestUrl("execution/$executionId/output", "offset=$offset&lastmod=$lastModified"))
                 .build()
