@@ -45,13 +45,13 @@ public class RunDeckAPI(val host: String, val authToken: String) {
                 return RunDeckExecuteJobResponse(200, element.getChild("execution").getAttribute("id").value, element.getChild("execution").getAttribute("permalink").value)
             }
             403 -> {
-                return RunDeckExecuteJobResponse(403, "Unauthorized")
+                return RunDeckExecuteJobResponse(403, "Unauthorized", "")
             }
             404 -> {
-                return RunDeckExecuteJobResponse(404, "Job not found")
+                return RunDeckExecuteJobResponse(404, "Job not found", "")
             }
             else -> {
-                return RunDeckExecuteJobResponse(response.code(), response.body().string())
+                return RunDeckExecuteJobResponse(response.code(), response.body().string(), "")
             }
         }
     }
