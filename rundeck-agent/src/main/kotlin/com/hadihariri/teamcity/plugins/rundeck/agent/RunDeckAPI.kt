@@ -42,7 +42,7 @@ public class RunDeckAPI(val host: String, val authToken: String) {
             200 -> {
                 val id = response.body().string()
                 val element = FileUtil.parseDocument(StringReader(id), false)
-                return RunDeckExecuteJobResponse(200, element.getChild("execution").getAttribute("id").value)
+                return RunDeckExecuteJobResponse(200, element.getChild("execution").getAttribute("id").value, element.getChild("execution").getAttribute("permalink").value)
             }
             403 -> {
                 return RunDeckExecuteJobResponse(403, "Unauthorized")
