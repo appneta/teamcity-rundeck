@@ -42,16 +42,16 @@ public class RunDeckAPI(val host: String, val authToken: String) {
             200 -> {
                 val id = response.body().string()
                 val element = FileUtil.parseDocument(StringReader(id), false)
-                return RunDeckExecuteJobResponse(200, element.getChild("execution").getAttribute("id").value)
+                return RunDeckExecuteJobResponse(200, element.getChild("execution").getAttribute("id").value, element.getChild("execution").getAttribute("href").value)
             }
             403 -> {
-                return RunDeckExecuteJobResponse(403, "Unauthorized")
+                return RunDeckExecuteJobResponse(403, "Unauthorized", "")
             }
             404 -> {
-                return RunDeckExecuteJobResponse(404, "Job not found")
+                return RunDeckExecuteJobResponse(404, "Job not found", "")
             }
             else -> {
-                return RunDeckExecuteJobResponse(response.code(), response.body().string())
+                return RunDeckExecuteJobResponse(response.code(), response.body().string(), "")
             }
         }
     }
